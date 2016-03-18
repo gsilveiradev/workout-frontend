@@ -1,7 +1,7 @@
 # jQuery module pattern mvc concept
 jQuery module pattern concept for use with backend mvc frameworks.
 
-> ** Reference: ** https://learn.jquery.com/code-organization/concepts/
+> **Reference:** https://learn.jquery.com/code-organization/concepts/
 
 ### Why?
 
