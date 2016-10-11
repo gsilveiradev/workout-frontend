@@ -3,32 +3,27 @@ Application.Controller.Home = (function($) {
 	function init() {
 
 		// This function will be called for all methods in controller='home'
-		$('.starter-template h1').html('We are at: '+ Application.vars.controller + '/' + Application.vars.method);
 	}
 
     function index() {
 
-    	// This function will be called for only method='index' in controller='home'
-
-        Application.alert('index');
-    }
-
-    function about() {
-
-        Application.alert('about');
-    }
-
-    function contact() {
-
-        Application.alert('contact');
+        // This function will be called for only method='index' in controller='home'
+        
+        $.ajax({
+            url: Application.vars.api_url + 'exercises/'
+        }).then(function(data) {
+            
+            data.exercises.forEach(function(item) {
+                
+                $("table.grid tbody").append("<tr><th scope=\"row\">" + item.id + "</th><td>" + item.exercise_name + "</td></tr>");
+            });
+        });
     }
 
     return {
 
     	'init'  	: init,
-        'index' 	: index,
-        'about'		: about,
-        'contact'	: contact
+        'index' 	: index
     };
 
 })(jQuery);
