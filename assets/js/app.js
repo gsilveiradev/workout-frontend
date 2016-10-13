@@ -19,7 +19,7 @@ jQuery(document).ready(function($) {
     // invoca o controlador e o método solicitados
     Application.vars  = {
 
-        api_url     : 'http://workout-api.rlv.me/api/',
+        api_url     : 'http://localhost:8000/api/',
         controller  : $('meta[name=controller]').attr('content'),
         method      : $('meta[name=method]').attr('content'), 
         directory   : $('meta[name=directory]').attr('content')
@@ -38,4 +38,61 @@ jQuery(document).ready(function($) {
     Application.Controller[igniter][Application.vars.method] &&
     Application.Controller[igniter][Application.vars.method].call();
 
+});
+
+jQuery.fn.ajaxForm = ( function(options) 
+{
+    var options = $.extend(
+    {
+        successCallback : (function() {}),
+        errorCallback   : (function() {})
+    }, options);
+
+    return this.submit( function() 
+    {
+        var form = $(this);
+        
+        $.ajax({
+
+            type: 'post',
+            url: form.attr('action'),
+            data: form.serialize(),
+            beforeSend: function() 
+            {
+
+            },
+            success: function(XMLHttpRequest) 
+            {
+                if (options.successCallback) 
+                {
+                    options.successCallback(XMLHttpRequest);
+                }
+            },
+            error: function(XMLHttpRequest) 
+            {
+                
+                if (XMLHttpRequest.status == '422') 
+                {
+                    var data = $.parseJSON(XMLHttpRequest.responseText);
+
+                    for (var fieldName in data.errors) 
+                    {
+                        for (var i in data.errors[fieldName]) alert(data.errors[fieldName][i]);
+                    }
+                    
+                    if (options.errorCallback) 
+                    {
+                        options.errorCallback(XMLHttpRequest);
+                    }
+                    
+                }
+                else
+                {
+                    alert('Unexpected error!');
+                }
+            }
+        });
+
+        return false;
+    });
 });
