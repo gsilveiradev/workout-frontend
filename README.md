@@ -4,7 +4,7 @@ In this project we are using the jQuery module pattern concept. The base code to
 
 ## Configure
 
-Open the ```assets/js/app.js``` and configure the ***api_url*** param.
+Open the ```assets/js/app.js``` and configure the **api_url** param.
 
 ## Real example
 
