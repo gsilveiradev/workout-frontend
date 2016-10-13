@@ -53,6 +53,7 @@
           <ul class="nav navbar-nav">
             <li><a href="index.html">Exercises</a></li>
             <li><a href="plans.html">Plans</a></li>
+            <li><a href="plan_days.html">Days</a></li>
             <li class="active"><a href="users.html">Users</a></li>
           </ul>
         </div><!--/.nav-collapse -->
@@ -70,6 +71,7 @@
               <th>#</th>
               <th>First Name</th>
               <th>E-mail</th>
+              <th>Plans</th>
               <th>Action</th>
             </tr>
           </thead>
@@ -98,7 +100,6 @@
           <button type="submit" class="btn btn-default">Submit</button>
           <a href="users.html" class="btn btn-link" role="button">Back</a>
         </form>
-
       </div>
 
       <div id="create-form">
@@ -119,7 +120,22 @@
           <button type="submit" class="btn btn-default">Submit</button>
           <a href="users.html" class="btn btn-link" role="button">Back</a>
         </form>
+      </div>
 
+      <div id="manage-plans-form">
+        <h1>Users / Manage Plans</h1>
+        <form action="">
+          <div class="form-group">
+            <label>First Name</label>
+            <input type="text" class="form-control" placeholder="First Name" name="firstname" disabled="disabled">
+          </div>
+          <div class="plans">
+
+          </div>
+          <input type="hidden" name="_method" value="PUT" />
+          <button type="submit" class="btn btn-default">Submit</button>
+          <a href="users.html" class="btn btn-link" role="button">Back</a>
+        </form>
       </div>
 
     </div><!-- /.container -->

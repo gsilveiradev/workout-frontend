@@ -11,7 +11,7 @@
 
     <!-- Meta tags used by app.js -->
     <meta name="directory" content="" />
-    <meta name="controller" content="exercises" />
+    <meta name="controller" content="plan_days" />
     <meta name="method" content="index" />
 
     <title>Workout</title>
@@ -51,9 +51,9 @@
         </div>
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="index.html">Exercises</a></li>
+            <li><a href="index.html">Exercises</a></li>
             <li><a href="plans.html">Plans</a></li>
-            <li><a href="plan_days.html">Days</a></li>
+            <li class="active"><a href="plan_days.html">Days</a></li>
             <li><a href="users.html">Users</a></li>
           </ul>
         </div><!--/.nav-collapse -->
@@ -63,13 +63,16 @@
     <div class="container">
 
       <div id="list">
-        <h1>Exercises</h1>
-        <button type="submit" class="btn btn-primary pull-right action-create">Create new exercise</button>
+        <h1>Plan Days</h1>
+        <button type="submit" class="btn btn-primary pull-right action-create">Create new plan day</button>
         <table class="table table-striped grid">
           <thead>
             <tr>
               <th>#</th>
+              <th>Plan</th>
               <th>Name</th>
+              <th>Order</th>
+              <th>Exercises</th>
               <th>Action</th>
             </tr>
           </thead>
@@ -80,28 +83,47 @@
       </div>
 
       <div id="edit-form">
-        <h1>Exercises / Edit</h1>
+        <h1>Plan Days / Edit</h1>
         <form action="">
           <div class="form-group">
+            <label>Plan</label>
+            <select class="form-control" name="plan_id">
+              
+            </select>
+          </div>
+          <div class="form-group">
             <label>Name</label>
-            <input type="text" class="form-control" placeholder="Name" name="exercise_name">
+            <input type="text" class="form-control" placeholder="Name" name="day_name">
+          </div>
+          <div class="form-group">
+            <label>Order</label>
+            <input type="text" class="form-control" placeholder="Order" name="order">
           </div>
           <input type="hidden" name="_method" value="PUT" />
           <button type="submit" class="btn btn-default">Submit</button>
-          <a href="index.html" class="btn btn-link" role="button">Back</a>
+          <a href="plan_days.html" class="btn btn-link" role="button">Back</a>
         </form>
-
       </div>
 
       <div id="create-form">
-        <h1>Exercises / Create</h1>
+        <h1>Plan Days / Create</h1>
         <form action="">
           <div class="form-group">
+            <label>Plan</label>
+            <select class="form-control" name="plan_id">
+              
+            </select>
+          </div>
+          <div class="form-group">
             <label>Name</label>
-            <input type="text" class="form-control" placeholder="Name" name="exercise_name">
+            <input type="text" class="form-control" placeholder="Name" name="day_name">
+          </div>
+          <div class="form-group">
+            <label>Order</label>
+            <input type="text" class="form-control" placeholder="Order" name="order">
           </div>
           <button type="submit" class="btn btn-default">Submit</button>
-          <a href="index.html" class="btn btn-link" role="button">Back</a>
+          <a href="plan_days.html" class="btn btn-link" role="button">Back</a>
         </form>
 
       </div>
@@ -120,6 +142,6 @@
 
     <!-- Application Jquery module pattern mvc concept -->
     <script src="assets/js/app.js"></script>
-    <script src="assets/js/app.exercises.js"></script>
+    <script src="assets/js/app.plan_days.js"></script>
   </body>
 </html>
