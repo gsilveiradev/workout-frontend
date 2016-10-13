@@ -19,7 +19,8 @@ jQuery(document).ready(function($) {
     // invoca o controlador e o método solicitados
     Application.vars  = {
 
-        api_url     : 'http://localhost:8000/api/',
+        //api_url     : 'http://localhost:8000/api/',
+        api_url     : 'http://workout-api.rlv.me/api/',
         controller  : $('meta[name=controller]').attr('content'),
         method      : $('meta[name=method]').attr('content'), 
         directory   : $('meta[name=directory]').attr('content')
