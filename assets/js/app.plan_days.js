@@ -1,4 +1,4 @@
-Application.Controller.Plans = (function($) {
+Application.Controller.PlanDays = (function($) {
 
     function init() {
 
@@ -11,12 +11,12 @@ Application.Controller.Plans = (function($) {
                 
                 $.ajax({
                     type: "POST",
-                    url: Application.vars.api_url + 'plans/' + id + '/',
+                    url: Application.vars.api_url + 'plan_days/' + id + '/',
                     data: "_method=DELETE"
                 })
                 .done(function(data) {
                     
-                    window.location = 'plans.html';
+                    window.location = 'plan_days.html';
                 })
                 .fail(function( jqXHR, textStatus ) {
                     alert( "Request failed: " + textStatus );
@@ -30,14 +30,14 @@ Application.Controller.Plans = (function($) {
             var id = $(this).data("id");
 
             $.ajax({
-                url: Application.vars.api_url + 'plans/' + id + '/'
+                url: Application.vars.api_url + 'plan_days/' + id + '/'
             })
             .done(function(data) {
                 
-                $("#edit-form form").attr("action", Application.vars.api_url + 'plans/' + id + '/');
-                $("#edit-form input[name=plan_name]").val(data.plan.plan_name);
-                $("#edit-form textarea[name=plan_description]").val(data.plan.plan_description);
-                $("#edit-form select[name=plan_dificulty]").val(data.plan.plan_dificulty);
+                $("#edit-form form").attr("action", Application.vars.api_url + 'plan_days/' + id + '/');
+                $("#edit-form input[name=day_name]").val(data.plan_day.day_name);
+                $("#edit-form input[name=order]").val(data.plan_day.order);
+                $("#edit-form select[name=plan_id]").val(data.plan_day.plan_id);
 
                 $("#list").hide();
                 $("#edit-form").show();
@@ -50,7 +50,7 @@ Application.Controller.Plans = (function($) {
         // CREATE action button
         $("body").on("click", ".action-create", function() {
 
-            $("#create-form form").attr("action", Application.vars.api_url + 'plans/');
+            $("#create-form form").attr("action", Application.vars.api_url + 'plan_days/');
 
             $("#list").hide();
             $("#create-form").show();
@@ -62,7 +62,7 @@ Application.Controller.Plans = (function($) {
 
         // Apply ajaxForm function to make ajax request by default
         $('form').ajaxForm({
-            successCallback : (function() { window.location = 'plans.html'; })
+            successCallback : (function() { window.location = 'plan_days.html'; })
         });
     }
 
@@ -70,13 +70,28 @@ Application.Controller.Plans = (function($) {
         
         // Load grid data
         $.ajax({
+            url: Application.vars.api_url + 'plan_days/'
+        })
+        .done(function(data) {
+
+            data.plan_days.forEach(function(item) {
+                
+                $("table.grid tbody").append("<tr><th scope=\"row\">" + item.id + "</th><td>" + item.plan.plan_name + "</td><td>" + item.day_name + "</td><td>" + item.order + "</td><td>" + item.exercise_instances.length + "</td><td><button type=\"button\" class=\"btn btn-default action-edit\" data-id=\"" + item.id + "\">Edit</button> <button type=\"button\" class=\"btn btn-default action-delete\" data-id=\"" + item.id + "\">Delete</button></td></tr>");
+            });
+        })
+        .fail(function( jqXHR, textStatus ) {
+            alert( "Request failed: " + textStatus );
+        });
+
+        // Load plans to select field
+        $.ajax({
             url: Application.vars.api_url + 'plans/'
         })
         .done(function(data) {
 
             data.plans.forEach(function(item) {
                 
-                $("table.grid tbody").append("<tr><th scope=\"row\">" + item.id + "</th><td>" + item.plan_name + "</td><td>" + item.plan_days.length + "</td><td><button type=\"button\" class=\"btn btn-default action-edit\" data-id=\"" + item.id + "\">Edit</button> <button type=\"button\" class=\"btn btn-default action-delete\" data-id=\"" + item.id + "\">Delete</button></td></tr>");
+                $("select[name=plan_id]").append("<option value=\"" + item.id + "\">" + item.plan_name + "</option>");
             });
         })
         .fail(function( jqXHR, textStatus ) {
